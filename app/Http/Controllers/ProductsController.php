@@ -35,12 +35,7 @@ class ProductsController extends Controller {
                 'errors' => $validator->messages()
             ], 422);
         } else {
-            $product = Products::create($request->post());
-            return response()->json([
-                'status' => true,
-                'message' => 'Product Created Successfully.',
-                'product' => $product
-            ]);
+            return Products::create($data);
         }
         
     }
@@ -59,12 +54,12 @@ class ProductsController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Products  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $product) {
+    public function update(Request $request) {
         $data = $request->post();
         $validation = Products::validationRules();
+        $validation['upc'] = 'required|unique:products,upc,'.$request->id;
         $validator = Validator::make($data, $validation);
         if ($validator->fails()) {
             return response()->json([
@@ -73,10 +68,12 @@ class ProductsController extends Controller {
                 'errors' => $validator->messages()
             ], 422);
         } else {
-            return response()->json([
-                'status' => true,
-                'message' => 'Product Updated Successfully.',
-                'product' => $product
+            return Products::where('id', $request->id)->update([
+                'name' => $request->name,
+                'upc' => $request->upc,
+                'price' => $request->price,
+                'status' => $request->status,
+                'image' => $request->image,
             ]);
         }
     }
@@ -84,15 +81,34 @@ class ProductsController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Products  $product
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $product) {
-        $product->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'Product Deleted Successfully.'
+    public function destroy(Request $request) {
+        // validate request
+        $this->validate($request, [
+            'id' => 'required',
         ]);
+        return Products::where('id', $request->id)->delete();
+    }
+    
+    /**
+     * Remove multiple records
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyMany(Request $request) {
+        $data = $request->post(); 
+        if (empty($data) || (count($data) < 1)) {
+            return response()->json([
+                'message' => "Something went wrong. Please try again later.", 
+                'status' => 'error', 
+                'errors' => "Something went wrong. Please try again later."
+            ], 422);
+        } else {
+            return Products::whereIn('id', $data)->delete();
+        }
     }
 
 }
