@@ -5,6 +5,8 @@ Vue.use(Router)
 import products from './admin/pages/products'
 import login from './admin/pages/login'
 import notfound from './admin/pages/notfound'
+import resetPassword from './admin/pages/resetPassword'
+import doResetPassword from './admin/pages/doResetPassword'
 
 const routes = [
     {
@@ -21,6 +23,16 @@ const routes = [
         path: '/login',
         component: login,
         name: 'login'
+    },
+    {
+        path: '/resetPassword',
+        component: resetPassword,
+        name: 'resetPassword'
+    },
+    {
+        path: '/doResetPassword',
+        component: doResetPassword,
+        name: 'doResetPassword'
     },
 ]
 
