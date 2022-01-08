@@ -15,7 +15,7 @@ class Products extends Model {
         $results = [
             'name' => 'required',
             'price' => 'required',
-            'upc' => 'required',
+            'upc' => 'required|unique:products',
             'status' => 'required',
             'image' => 'required',
         ];
