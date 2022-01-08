@@ -14,7 +14,7 @@ class Products extends Model {
     public static function validationRules() {
         $results = [
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'upc' => 'required|unique:products',
             'status' => 'required',
             'image' => 'required',
