@@ -18,6 +18,7 @@ Route::prefix('app')->middleware([\App\Http\Middleware\UserStatusVerify::class])
     Route::get('/get_products', 'ProductsController@index');
     Route::post('/edit_product', 'ProductsController@update');
     Route::post('/delete_product', 'ProductsController@destroy');
+    Route::post('/delete_products', 'ProductsController@destroyMany');
 
     Route::post('/login', 'HomeController@login');
     
