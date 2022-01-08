@@ -23,5 +23,8 @@ Route::prefix('app')->middleware([\App\Http\Middleware\UserStatusVerify::class])
 });
 
 Route::get('/logout', 'HomeController@logout');
+Route::post('/password/reset', 'ResetPasswordController@resetForm');
+Route::post('/password/doreset', 'ResetPasswordController@submitResetPasswordForm');
+
 Route::get('/', 'HomeController@index');
 Route::any('{slug}', 'HomeController@index')->where('path','[-a-z0-9_\s]+');
