@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('app')->middleware([UserStatusVerify::class])->group(function(){
+    Route::post('/create_product', 'ProductsController@store');
+    Route::get('/get_products', 'ProductsController@index');
+    Route::post('/edit_product', 'ProductsController@update');
+    Route::post('/delete_product', 'ProductsController@destroy');
 });
+
+Route::get('/logout', 'HomeController@logout');
+Route::get('/', 'HomeController@index');
+Route::any('{slug}', 'HomeController@index')->where('path','[-a-z0-9_\s]+');
