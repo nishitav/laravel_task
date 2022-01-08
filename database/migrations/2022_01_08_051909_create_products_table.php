@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 8, 2);
             $table->string('upc', 20)->unique();
             $table->boolean('status');
-            $table->string('image', 50);
+            $table->string('image', 100);
             $table->timestamps();
         });
     }
