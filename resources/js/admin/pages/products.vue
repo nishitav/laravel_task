@@ -340,6 +340,7 @@
                     deletingIndexs: [],
                     isDeleted: false
                 };
+                this.deletingIndex = i;
                 this.$store.commit("setDeletingModalObj", deleteModalObj);
             },
             showManyDeletingModal() {
@@ -435,7 +436,9 @@
         watch: {
             getDeleteModalObj(obj) {
                 if (obj.isDeleted) {
-                    if (this.selectedProductIds.length > 0) {
+                    console.log(this.deletingIndex);
+                    console.log(this.selectedProductIds);
+                    if (this.deletingIndex < 0 && this.selectedProductIds.length > 0) {
                         this.selectedProductIds.sort(function(a, b) {
                             return a - b;
                         });
@@ -445,9 +448,10 @@
                             counter++;
                         });
                     } else {
-                        this.productLists.splice(obj.deletingIndex, 1);
+                        this.productLists.splice(this.deletingIndex, 1);
                     }
                     this.selectedProductIds = [];
+                    this.deletingIndex = -1;
                 }
             }
         }
