@@ -32,7 +32,7 @@ export default {
     }, 
 
     methods : {
-        goToResetPassword(){
+        async goToResetPassword(){
             this.$router.push('/resetPassword'); 
         },
         async login(){
@@ -61,12 +61,6 @@ export default {
     }
 }
 </script>
-
-
-
-
-
-
 <style scoped>
     ._1adminOverveiw_table_recent {
         margin: 0 auto;
