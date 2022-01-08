@@ -436,16 +436,18 @@
             getDeleteModalObj(obj) {
                 if (obj.isDeleted) {
                     if (this.selectedProductIds.length > 0) {
+                        this.selectedProductIds.sort(function(a, b) {
+                            return a - b;
+                        });
                         var counter = 0;
                         this.selectedProductIds.forEach((value, index) => {
                             this.productLists.splice(value - counter, 1);
                             counter++;
                         });
-
-
                     } else {
                         this.productLists.splice(obj.deletingIndex, 1);
                     }
+                    this.selectedProductIds = [];
                 }
             }
         }
