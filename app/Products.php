@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
-{
-    protected $fillable = ['name','price','upc','status','image'];
-    
+class Products extends Model {
+
+    protected $fillable = ['name', 'price', 'upc', 'status', 'image'];
+
     /**
      * Model validation rules
-    */
+     */
     public static function validationRules() {
         $results = [
             'name' => 'required',
@@ -22,5 +22,5 @@ class Products extends Model
 
         return $results;
     }
-    
+
 }
