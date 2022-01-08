@@ -15,6 +15,11 @@ class UserStatusVerify
      */
     public function handle($request, Closure $next)
     {
+        // if login request then bypass
+        if($request->path()=='app/login'){
+            return $next($request);
+        }
+
         // Make sure user is authenticated, for some routes.
         if(!Auth::check()){
             return response()->json([

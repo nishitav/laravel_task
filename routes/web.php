@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('app')->middleware([UserStatusVerify::class])->group(function(){
+Route::prefix('app')->middleware([\App\Http\Middleware\UserStatusVerify::class])->group(function(){
     Route::post('/create_product', 'ProductsController@store');
     Route::get('/get_products', 'ProductsController@index');
     Route::post('/edit_product', 'ProductsController@update');
     Route::post('/delete_product', 'ProductsController@destroy');
+
+    Route::post('/login', 'HomeController@login');
 });
 
 Route::get('/logout', 'HomeController@logout');
