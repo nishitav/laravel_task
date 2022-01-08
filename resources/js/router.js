@@ -8,7 +8,7 @@ import notfound from './admin/pages/notfound'
 
 const routes = [
     {
-        path: '/products',
+        path: '/',
         component: products,
         name: 'products'
     },
