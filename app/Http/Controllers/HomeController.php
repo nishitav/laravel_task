@@ -58,4 +58,20 @@ class HomeController extends Controller {
         Auth::logout();
         return redirect('/login');
     }
+    
+    public function upload(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:jpeg,jpg,png',
+        ]);
+        $picName = time() . '.' . $request->file->extension();
+        $request->file->move(public_path('uploads'), $picName);
+        return $picName;
+    }
+    public function deleteImage(Request $request)
+    {
+        $fileName = $request->imageName;
+        $this->deleteFileFromServer($fileName, false);
+        return 'done';
+    }
 }

@@ -20,6 +20,9 @@ Route::prefix('app')->middleware([\App\Http\Middleware\UserStatusVerify::class])
     Route::post('/delete_product', 'ProductsController@destroy');
 
     Route::post('/login', 'HomeController@login');
+    
+    Route::post('/upload', 'HomeController@upload');
+    Route::post('/delete_image', 'HomeController@deleteImage');
 });
 
 Route::get('/logout', 'HomeController@logout');
