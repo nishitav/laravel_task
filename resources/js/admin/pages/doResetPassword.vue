@@ -69,6 +69,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
     ._1adminOverveiw_table_recent {
         margin: 0 auto;
