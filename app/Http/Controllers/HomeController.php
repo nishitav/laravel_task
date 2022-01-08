@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller {
 
@@ -11,11 +12,11 @@ class HomeController extends Controller {
      */
     public function index(Request $request) {
         // check user logged in
-        if (!Auth::check() && $request->path() != 'login') {
+        if (!Auth::check() && $request->path() != 'login' && $request->path() != 'doResetPassword') {
             return redirect('/login');
         }
 
-        // if user logged in then redirect to welcome view
+        // if user not logged in and path not login
         if (!Auth::check() && $request->path() == 'login') {
             return view('welcome');
         }
