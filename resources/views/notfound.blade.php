@@ -65,14 +65,8 @@
     </head>
     <body>
         <body>
-         <div id="app">
-             @if(Auth::check())
-                <mainapp :user="{{Auth::user()}}"></mainapp>
-            @else
-                <mainapp :user="false"></mainapp>
-            @endif
-         </div>
-    </body>
+            <h1>You do not have permission to view this page.</h1>
+        </body>
     <script src="{{mix('/js/app.js')}}"></script>
     </body>
 </html>
